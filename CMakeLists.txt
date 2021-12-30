@@ -33,6 +33,14 @@ target_link_libraries(
 
 add_subdirectory(include/glad)
 
+add_executable(main main.cpp)
+
+target_link_libraries(
+    main
+        PUBLIC
+            ${PROJECT_NAME}
+)
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
