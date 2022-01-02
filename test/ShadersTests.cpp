@@ -5,6 +5,7 @@
 TEST(ShadersTests, read_shader_file_test) {
     const char *p_expected = 
     "#version 330 core\n"
+    "\n"
     "layout (location = 0) in vec3 aPos;\n"
     "\n"
     "void main() {\n"
