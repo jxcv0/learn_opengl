@@ -4,8 +4,9 @@
 
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <string.h>
 
-int main() {
+int main(int argc, char const *argv[]) {
 
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -106,7 +107,34 @@ int main() {
 
     // Unbinding for safety?
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);   
+    glBindVertexArray(0);
+
+    if (argc != 2) {
+        std::cerr << 
+            "Usage:\n" <<
+            "   hellorectangle <arg>\n" <<
+            "       -l - wireframe mode\n" <<
+            "       -f - fill mode\n" << 
+        std::endl;
+        
+        return EXIT_FAILURE;
+    }
+    
+
+    if (strcmp(argv[1], "-l") == 0) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    } else if (strcmp(argv[1], "-f") == 0) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    } else {
+        std::cerr << 
+            "Usage:\n" <<
+            "   hellorectangle <arg>\n" <<
+            "       -l - wireframe mode\n" <<
+            "       -f - fill mode\n" << 
+        std::endl;
+
+        return EXIT_FAILURE;
+    }
 
     // Render loop
     while(!glfwWindowShouldClose(window)) {
