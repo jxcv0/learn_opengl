@@ -8,6 +8,17 @@
 
 int main(int argc, char const *argv[]) {
 
+    if (argc != 2) {
+        std::cerr << 
+            "Usage:\n" <<
+            "   hellorectangle <arg>\n" <<
+            "       -l - wireframe mode\n" <<
+            "       -f - fill mode\n" << 
+        std::endl;
+        
+        return EXIT_FAILURE;
+    }
+
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -108,17 +119,6 @@ int main(int argc, char const *argv[]) {
     // Unbinding for safety?
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-
-    if (argc != 2) {
-        std::cerr << 
-            "Usage:\n" <<
-            "   hellorectangle <arg>\n" <<
-            "       -l - wireframe mode\n" <<
-            "       -f - fill mode\n" << 
-        std::endl;
-        
-        return EXIT_FAILURE;
-    }
     
 
     if (strcmp(argv[1], "-l") == 0) {
