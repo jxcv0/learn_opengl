@@ -31,21 +31,21 @@ int main() {
     glViewport(0, 0, 1280, 720);
     glfwSetFramebufferSizeCallback(window, util::framebuffer_size_callback);
 
-    // Triangle
+    // Triangle vertices and colours
     float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
         0.5f, -0.5f, 0.0f,
-        0.0f,  0.5f, 0.0f
+       -0.5f, -0.5f, 0.0f,
+        0.0f,  0.5f, 0.0f,
     };
 
     // Vertex shader
     unsigned int vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    shaders::load_shader(vertex_shader, "shaders/HelloShaders.vert");
+    shaders::load_shader(vertex_shader, "shaders/HelloUniforms.vert");
     glCompileShader(vertex_shader);
 
     // Fragment shader
     unsigned int frag_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    shaders::load_shader(frag_shader, "shaders/HelloShaders.frag");
+    shaders::load_shader(frag_shader, "shaders/HelloUniforms.frag");
     glCompileShader(frag_shader);
 
     // Check vert shader compile success
