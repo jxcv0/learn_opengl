@@ -113,7 +113,7 @@ int main() {
     );
     glEnableVertexAttribArray(1);
 
-    // Unbinding for safety?
+    // Unbinding for safety
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);   
 
