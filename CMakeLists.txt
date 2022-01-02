@@ -28,11 +28,13 @@ find_package(glfw3 3.3 REQUIRED)
 set(
     SOURCES
         src/Shaders.cpp
+        src/Util.cpp
 )
 
 set(
     HEADERS
         include/Shaders.hpp
+        include/Util.hpp
 )
 
 add_library(${PROJECT_NAME} STATIC ${HEADERS} ${SOURCES})
