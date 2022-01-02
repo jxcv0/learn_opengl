@@ -89,25 +89,28 @@ int main() {
     glDeleteShader(vertex_shader);
     glDeleteShader(frag_shader);
 
-    // VBO
-    unsigned int VBO;
-    glGenBuffers(1, &VBO);
-
-    // VAO
-    unsigned int VAO;
+    // VBO and VAO and inking vertex attributes
+    unsigned int VBO, VAO;
     glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    // Linking vertex attributes
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);   
+    glEnableVertexAttribArray(0);
+
+    // Unbinding for safety?
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);   
 
     // Render loop
     while(!glfwWindowShouldClose(window)) {
         proccess_input(window);
+
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
 
         glUseProgram(shader_pgrm);
         glBindVertexArray(VAO);
@@ -116,6 +119,11 @@ int main() {
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
+    // Deallocate
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteProgram(shader_pgrm);
     
     glfwTerminate();
     return 0;
